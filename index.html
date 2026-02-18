@@ -319,9 +319,34 @@ section { padding: 100px 0; }
   transition: transform 0.5s ease;
 }
 .prop-card:hover .prop-img-inner { transform: scale(1.05); }
-.img-bucaro-card { background: linear-gradient(160deg, #7A5C2E 0%, #C9A96E 40%, #E8D5A3 70%, #9B7440 100%); }
-.img-recoleccion-card { background: linear-gradient(160deg, #2E4A3E 0%, #5A8A6E 40%, #A8C5B0 70%, #3D6B55 100%); }
-.img-eon-card { background: linear-gradient(160deg, #2B3A4A 0%, #4A6B8A 40%, #A0BDD4 70%, #355570 100%); }
+.prop-img-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.prop-card-btns {
+  display: flex;
+  gap: 8px;
+}
+.btn-airbnb {
+  background: transparent;
+  color: var(--brown);
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn-airbnb:hover { border-color: var(--gold); color: var(--gold); }
 
 .prop-badge {
   position: absolute;
@@ -716,7 +741,7 @@ footer {
     </div>
     <div class="hero-stats">
       <div class="stat-item">
-        <div class="stat-num">3</div>
+        <div class="stat-num">6</div>
         <div class="stat-label">Propiedades</div>
       </div>
       <div class="stat-item">
@@ -750,21 +775,21 @@ footer {
         <div class="section-tag">Nuestras propiedades</div>
         <h2 class="section-title">Lugares que<br><em>recordar&aacute;s</em></h2>
       </div>
-      <p class="section-sub">Cada propiedad tiene su propio car&aacute;cter. Las tres, el mismo est&aacute;ndar de calidad.</p>
+      <p class="section-sub">Cada propiedad tiene su propio car&aacute;cter. Las seis, el mismo est&aacute;ndar de calidad.</p>
     </div>
     <div class="props-grid">
 
-      <!-- EL BUCARO -->
-      <div class="prop-card" onclick="openBooking('El Búcaro')">
+      <!-- BUCARO A -->
+      <div class="prop-card">
         <div class="prop-img">
-          <div class="prop-img-inner img-bucaro-card"></div>
-          <div class="prop-badge">Destacada</div>
+          <div class="prop-img-inner"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1034801137700604686/original/57a7d84a-3566-4941-a778-7b1a6493d155.jpeg?im_w=960" alt="El Búcaro A"></div>
+          <div class="prop-badge">El B&uacute;caro &middot; A</div>
           <div class="prop-stars">&#9733; 4.95</div>
         </div>
         <div class="prop-body">
           <div class="prop-location">&#128205; Antigua Guatemala</div>
-          <div class="prop-name">El B&uacute;caro</div>
-          <p class="prop-desc">En el coraz&oacute;n de la Antigua colonial. A pasos del Arco de Santa Catalina, rodeada de caf&eacute;s, restaurantes y la magia de la ciudad.</p>
+          <div class="prop-name">El B&uacute;caro A</div>
+          <p class="prop-desc">En el coraz&oacute;n de la Antigua colonial. A pasos del Arco de Santa Catalina, rodeada de caf&eacute;s y restaurantes.</p>
           <div class="prop-amenities">
             <span class="amenity">WiFi r&aacute;pido</span>
             <span class="amenity">Cocina completa</span>
@@ -773,15 +798,99 @@ footer {
           </div>
           <div class="prop-footer">
             <div class="prop-price">$85 <span>/ noche</span></div>
-            <button class="btn-reservar" onclick="event.stopPropagation();openBooking('El Búcaro')">Reservar</button>
+            <div class="prop-card-btns">
+              <a href="https://www.airbnb.mx/rooms/1034801137700604686" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
+              <button class="btn-reservar" onclick="event.stopPropagation();openBooking('El Búcaro A')">Reservar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUCARO B -->
+      <div class="prop-card">
+        <div class="prop-img">
+          <div class="prop-img-inner"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTMyNzEzNTQ5NDU0Njg5NjIz/original/5b07be2a-6279-46c4-b83c-08378b0c1adf.jpeg?im_w=960" alt="El Búcaro B"></div>
+          <div class="prop-badge">El B&uacute;caro &middot; B</div>
+          <div class="prop-stars">&#9733; 4.95</div>
+        </div>
+        <div class="prop-body">
+          <div class="prop-location">&#128205; Antigua Guatemala</div>
+          <div class="prop-name">El B&uacute;caro B</div>
+          <p class="prop-desc">Encanto colonial en el centro hist&oacute;rico. Ideal para parejas o viajeros que buscan autenticidad y comodidad.</p>
+          <div class="prop-amenities">
+            <span class="amenity">WiFi r&aacute;pido</span>
+            <span class="amenity">Cocina completa</span>
+            <span class="amenity">Patio</span>
+            <span class="amenity">A/C</span>
+          </div>
+          <div class="prop-footer">
+            <div class="prop-price">$85 <span>/ noche</span></div>
+            <div class="prop-card-btns">
+              <a href="https://www.airbnb.mx/rooms/932713549454689623" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
+              <button class="btn-reservar" onclick="event.stopPropagation();openBooking('El Búcaro B')">Reservar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUCARO C -->
+      <div class="prop-card">
+        <div class="prop-img">
+          <div class="prop-img-inner"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1021139159023263072/original/ca2ef03b-6bdc-43c1-a5c7-b2b5e827fa0a.jpeg?im_w=960" alt="El Búcaro C"></div>
+          <div class="prop-badge">El B&uacute;caro &middot; C</div>
+          <div class="prop-stars">&#9733; 4.95</div>
+        </div>
+        <div class="prop-body">
+          <div class="prop-location">&#128205; Antigua Guatemala</div>
+          <div class="prop-name">El B&uacute;caro C</div>
+          <p class="prop-desc">Espacioso y luminoso, con toda la magia de la Antigua a tu puerta. Perfecto para familias o grupos peque&ntilde;os.</p>
+          <div class="prop-amenities">
+            <span class="amenity">WiFi r&aacute;pido</span>
+            <span class="amenity">Cocina completa</span>
+            <span class="amenity">Patio</span>
+            <span class="amenity">A/C</span>
+          </div>
+          <div class="prop-footer">
+            <div class="prop-price">$85 <span>/ noche</span></div>
+            <div class="prop-card-btns">
+              <a href="https://www.airbnb.mx/rooms/1021139159023263072" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
+              <button class="btn-reservar" onclick="event.stopPropagation();openBooking('El Búcaro C')">Reservar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BUCARO D -->
+      <div class="prop-card">
+        <div class="prop-img">
+          <div class="prop-img-inner"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTk5MjI1MTQwNzQzNzY2ODgw/original/21244f5f-659a-48fa-a6ea-9e9e549b9860.jpeg?im_w=960" alt="El Búcaro D"></div>
+          <div class="prop-badge">El B&uacute;caro &middot; D</div>
+          <div class="prop-stars">&#9733; 4.95</div>
+        </div>
+        <div class="prop-body">
+          <div class="prop-location">&#128205; Antigua Guatemala</div>
+          <div class="prop-name">El B&uacute;caro D</div>
+          <p class="prop-desc">Acogedor y con car&aacute;cter propio dentro del complejo El B&uacute;caro. Ubicaci&oacute;n inmejorable en Antigua.</p>
+          <div class="prop-amenities">
+            <span class="amenity">WiFi r&aacute;pido</span>
+            <span class="amenity">Cocina completa</span>
+            <span class="amenity">Patio</span>
+            <span class="amenity">A/C</span>
+          </div>
+          <div class="prop-footer">
+            <div class="prop-price">$85 <span>/ noche</span></div>
+            <div class="prop-card-btns">
+              <a href="https://www.airbnb.mx/rooms/999225140743766880" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
+              <button class="btn-reservar" onclick="event.stopPropagation();openBooking('El Búcaro D')">Reservar</button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- RECOLECCION -->
-      <div class="prop-card" onclick="openBooking('Recolección')">
+      <div class="prop-card">
         <div class="prop-img">
-          <div class="prop-img-inner img-recoleccion-card"></div>
+          <div class="prop-img-inner"><img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTExNzUxMDA0MzAwNTIwNDcwNg%3D%3D/original/48e2d20a-4716-4fa6-a19b-e590d24c5a3d.jpeg?im_w=960" alt="Recolección"></div>
           <div class="prop-stars">&#9733; 4.88</div>
         </div>
         <div class="prop-body">
@@ -796,15 +905,18 @@ footer {
           </div>
           <div class="prop-footer">
             <div class="prop-price">$70 <span>/ noche</span></div>
-            <button class="btn-reservar" onclick="event.stopPropagation();openBooking('Recolección')">Reservar</button>
+            <div class="prop-card-btns">
+              <a href="https://www.airbnb.mx/rooms/1117510043005204706" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
+              <button class="btn-reservar" onclick="event.stopPropagation();openBooking('Recolección')">Reservar</button>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- EON -->
-      <div class="prop-card" onclick="openBooking('EON')">
+      <div class="prop-card">
         <div class="prop-img">
-          <div class="prop-img-inner img-eon-card"></div>
+          <div class="prop-img-inner"><img src="https://a0.muscache.com/im/pictures/53a575b7-5722-472d-ac41-f04f9060163e.jpg?im_w=960" alt="EON"></div>
           <div class="prop-stars">&#9733; 4.82</div>
         </div>
         <div class="prop-body">
@@ -819,7 +931,10 @@ footer {
           </div>
           <div class="prop-footer">
             <div class="prop-price">$55 <span>/ noche</span></div>
-            <button class="btn-reservar" onclick="event.stopPropagation();openBooking('EON')">Reservar</button>
+            <div class="prop-card-btns">
+              <a href="https://www.airbnb.mx/rooms/858040597501803291" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
+              <button class="btn-reservar" onclick="event.stopPropagation();openBooking('EON')">Reservar</button>
+            </div>
           </div>
         </div>
       </div>
@@ -904,9 +1019,16 @@ footer {
             <label>Propiedad de inter&eacute;s</label>
             <select id="propiedad" required>
               <option value="">Seleccionar...</option>
-              <option value="El Búcaro">El B&uacute;caro &mdash; Antigua Guatemala</option>
-              <option value="Recolección">Recolecci&oacute;n &mdash; Ciudad, Zona 14</option>
-              <option value="EON">EON &mdash; Ciudad, Zona 10</option>
+              <optgroup label="El Búcaro — Antigua Guatemala">
+                <option value="El Búcaro A">El B&uacute;caro A</option>
+                <option value="El Búcaro B">El B&uacute;caro B</option>
+                <option value="El Búcaro C">El B&uacute;caro C</option>
+                <option value="El Búcaro D">El B&uacute;caro D</option>
+              </optgroup>
+              <optgroup label="Ciudad de Guatemala">
+                <option value="Recolección">Recolecci&oacute;n &mdash; Zona 14</option>
+                <option value="EON">EON &mdash; Zona 10</option>
+              </optgroup>
               <option value="Cualquiera">Cualquiera disponible</option>
             </select>
           </div>
@@ -1004,7 +1126,7 @@ const cardElement = elements.create('card', {
 });
 
 // Precio por noche (USD) por propiedad - ajusta si cambian
-const PRICES = { 'El Búcaro': 85, 'Recolección': 70, 'EON': 55, 'Cualquiera': 70 };
+const PRICES = { 'El Búcaro A': 85, 'El Búcaro B': 85, 'El Búcaro C': 85, 'El Búcaro D': 85, 'Recolección': 70, 'EON': 55, 'Cualquiera': 70 };
 
 let currentBooking = {};
 let cardMounted = false;
