@@ -532,20 +532,19 @@
           <p class="section-sub">Elige tu propiedad y fechas. Te generamos una cotización lista para enviar por WhatsApp — te confirmamos disponibilidad en menos de 2 horas.</p>
           <p class="booking-quote">&ldquo;Cada estad&iacute;a es una historia nueva. Nos encanta ser parte de la tuya.&rdquo;</p>
           <div class="booking-contact-cards">
-            <!-- TODO: Reemplaza +50212345678 con tu número real de WhatsApp -->
-            <a href="https://wa.me/50212345678" target="_blank" class="contact-card">
+            <a href="https://wa.me/50240066435" target="_blank" class="contact-card">
               <div class="contact-icon icon-wa">&#128241;</div>
               <div class="contact-info">
                 <div class="contact-label">WhatsApp directo</div>
-                <div class="contact-val">+502 1234-5678</div>
+                <div class="contact-val">+502 4006-6435</div>
               </div>
             </a>
             <!-- TODO: Reemplaza con tu email real -->
-            <a href="mailto:info@vacasagroup.com" class="contact-card">
+            <a href="mailto:vacasagroup@gmail.com" class="contact-card">
               <div class="contact-icon icon-email">&#9993;</div>
               <div class="contact-info">
                 <div class="contact-label">Correo electr&oacute;nico</div>
-                <div class="contact-val">info@vacasagroup.com</div>
+                <div class="contact-val">vacasagroup@gmail.com</div>
               </div>
             </a>
           </div>
@@ -746,20 +745,26 @@
       const subject = encodeURIComponent('Cotización — ' + prop + ' | ' + llegada + ' al ' + salida);
       const body = encodeURIComponent(
         'Hola equipo Vacasa Group,\n\n' +
-        'Me gustaría solicitar una cotización:\n\n' +
-        'Nombre: ' + nombre + '\n' +
-        'WhatsApp: ' + tel + '\n' +
-        'Propiedad: ' + prop + '\n' +
-        'Llegada: ' + llegada + '\n' +
-        'Salida: ' + salida + '\n' +
-        'Noches: ' + nights + '\n' +
-        'Huéspedes: ' + huespedes +
-        (msg ? '\n\nMensaje adicional:\n' + msg : '') +
-        '\n\n¿Pueden confirmarme disponibilidad y precio? Gracias.'
+        'Solicito una cotización con los siguientes datos:\n\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━\n' +
+        '  DATOS DEL HUÉSPED\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━\n' +
+        'Nombre:       ' + nombre + '\n' +
+        'WhatsApp:     ' + tel + '\n\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━\n' +
+        '  DETALLES DE LA ESTADÍA\n' +
+        '━━━━━━━━━━━━━━━━━━━━━━\n' +
+        'Propiedad:    ' + prop + '\n' +
+        'Llegada:      ' + llegada + '\n' +
+        'Salida:       ' + salida + '\n' +
+        'Noches:       ' + nights + '\n' +
+        'Huéspedes:    ' + huespedes + '\n' +
+        (msg ? '\nMensaje:\n' + msg + '\n' : '') +
+        '\n━━━━━━━━━━━━━━━━━━━━━━\n\n' +
+        'Por favor confirmen disponibilidad y precio. Gracias!'
       );
 
-      // TODO: Reemplaza con tu correo real
-      window.location.href = 'mailto:info@vacasagroup.com?subject=' + subject + '&body=' + body;
+      window.location.href = 'mailto:vacasagroup@gmail.com?subject=' + subject + '&body=' + body;
 
       document.getElementById('modalProp').textContent = prop;
       document.getElementById('successModal').classList.add('open');
