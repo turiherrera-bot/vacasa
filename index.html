@@ -60,30 +60,29 @@
     .hero-stats { display: flex; gap: 40px; margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border); }
     .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--dark); line-height: 1; }
     .stat-label { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
-    .hero-right { position: relative; overflow: hidden; }
+    .hero-right { position: relative; overflow: hidden; background: var(--dark); }
     .hero-img-overlay { position: absolute; top: 0; left: 0; bottom: 0; width: 100px; background: linear-gradient(90deg, var(--cream), transparent); z-index: 3; pointer-events: none; }
 
-    /* CAROUSEL */
-    .carousel { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .carousel-track { display: flex; height: 100%; transition: transform 0.7s cubic-bezier(0.77, 0, 0.175, 1); will-change: transform; }
-    .carousel-slide { min-width: 100%; height: 100%; position: relative; flex-shrink: 0; }
-    .carousel-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .carousel-slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,22,18,0.55) 0%, transparent 50%); }
-    .carousel-label { position: absolute; bottom: 28px; left: 28px; z-index: 2; }
-    .carousel-label-location { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 4px; }
-    .carousel-label-name { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: white; line-height: 1.1; }
+    /* PHOTO GRID */
+    .photo-grid-wrap { position: absolute; inset: 0; display: flex; flex-direction: column; }
+    .photo-grid-inner { display: flex; height: 100%; gap: 3px; transition: transform 0.6s cubic-bezier(0.77,0,0.175,1); }
+    .photo-panel { min-width: calc(50% - 1.5px); height: 100%; position: relative; overflow: hidden; cursor: pointer; flex-shrink: 0; }
+    .photo-panel img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .photo-panel:hover img { transform: scale(1.05); }
+    .photo-panel::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,22,18,0.6) 0%, transparent 55%); }
+    .photo-panel-label { position: absolute; bottom: 16px; left: 16px; z-index: 2; }
+    .photo-panel-loc { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-light); margin-bottom: 3px; }
+    .photo-panel-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; color: white; line-height: 1.1; }
 
+    /* Grid arrows */
+    .grid-nav { position: absolute; bottom: 20px; right: 20px; z-index: 4; display: flex; gap: 8px; }
+    .grid-btn { background: rgba(245,240,232,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: all 0.2s; }
+    .grid-btn:hover { background: rgba(201,169,110,0.4); border-color: var(--gold); }
 
-    /* Dots */
-    .carousel-dots { position: absolute; bottom: 28px; right: 28px; z-index: 4; display: flex; gap: 8px; align-items: center; }
-    .carousel-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.35); cursor: pointer; transition: all 0.3s; border: none; padding: 0; }
-    .carousel-dot.active { background: var(--gold); width: 20px; border-radius: 3px; }
-
-    /* Arrows */
-    .carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); z-index: 4; background: rgba(245,240,232,0.15); backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.2); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: all 0.2s; }
-    .carousel-btn:hover { background: rgba(201,169,110,0.35); border-color: var(--gold); }
-    .carousel-btn.prev { right: 80px; }
-    .carousel-btn.next { right: 28px; }
+    /* Grid dots */
+    .grid-dots { position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%); z-index: 4; display: flex; gap: 6px; }
+    .grid-dot { width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.35); border: none; cursor: pointer; padding: 0; transition: all 0.3s; }
+    .grid-dot.active { background: var(--gold); width: 16px; border-radius: 3px; }
 
     /* SECTION COMMONS */
     section { padding: 100px 0; }
@@ -198,8 +197,8 @@
       .nav-links { display: none; }
       .hero { grid-template-columns: 1fr; min-height: auto; }
       .hero-left { padding: 100px 24px 60px; }
-      .hero-right { height: 300px; position: relative; }
-      .carousel { height: 300px; }
+      .hero-right { height: 280px; position: relative; }
+      .photo-panel { min-width: 75%; }
       .props-grid { grid-template-columns: 1fr; }
       .booking-grid { grid-template-columns: 1fr; gap: 40px; }
       .features-grid { grid-template-columns: 1fr; }
@@ -249,66 +248,68 @@
     </div>
     <div class="hero-right">
       <div class="hero-img-overlay"></div>
-      <div class="carousel" id="heroCarousel">
-        <div class="carousel-track" id="carouselTrack">
+      <div class="photo-grid-wrap">
+        <div class="photo-grid-inner" id="photoGrid">
 
-          <div class="carousel-slide">
+          <div class="photo-panel" onclick="scrollToProp('bucaro-a')">
             <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1034801137700604686/original/57a7d84a-3566-4941-a778-7b1a6493d155.jpeg?im_w=960" alt="El Búcaro A">
-            <div class="carousel-label">
-              <div class="carousel-label-location">Antigua Guatemala</div>
-              <div class="carousel-label-name">El B&uacute;caro A</div>
+            <div class="photo-panel-label">
+              <div class="photo-panel-loc">Antigua Guatemala</div>
+              <div class="photo-panel-name">El B&uacute;caro A</div>
             </div>
           </div>
 
-          <div class="carousel-slide">
+          <div class="photo-panel" onclick="scrollToProp('bucaro-b')">
             <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTMyNzEzNTQ5NDU0Njg5NjIz/original/5b07be2a-6279-46c4-b83c-08378b0c1adf.jpeg?im_w=960" alt="El Búcaro B">
-            <div class="carousel-label">
-              <div class="carousel-label-location">Antigua Guatemala</div>
-              <div class="carousel-label-name">El B&uacute;caro B</div>
+            <div class="photo-panel-label">
+              <div class="photo-panel-loc">Antigua Guatemala</div>
+              <div class="photo-panel-name">El B&uacute;caro B</div>
             </div>
           </div>
 
-          <div class="carousel-slide">
+          <div class="photo-panel" onclick="scrollToProp('bucaro-c')">
             <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-1021139159023263072/original/ca2ef03b-6bdc-43c1-a5c7-b2b5e827fa0a.jpeg?im_w=960" alt="El Búcaro C">
-            <div class="carousel-label">
-              <div class="carousel-label-location">Antigua Guatemala</div>
-              <div class="carousel-label-name">El B&uacute;caro C</div>
+            <div class="photo-panel-label">
+              <div class="photo-panel-loc">Antigua Guatemala</div>
+              <div class="photo-panel-name">El B&uacute;caro C</div>
             </div>
           </div>
 
-          <div class="carousel-slide">
+          <div class="photo-panel" onclick="scrollToProp('bucaro-d')">
             <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6OTk5MjI1MTQwNzQzNzY2ODgw/original/21244f5f-659a-48fa-a6ea-9e9e549b9860.jpeg?im_w=960" alt="El Búcaro D">
-            <div class="carousel-label">
-              <div class="carousel-label-location">Antigua Guatemala</div>
-              <div class="carousel-label-name">El B&uacute;caro D</div>
+            <div class="photo-panel-label">
+              <div class="photo-panel-loc">Antigua Guatemala</div>
+              <div class="photo-panel-name">El B&uacute;caro D</div>
             </div>
           </div>
 
-          <div class="carousel-slide">
+          <div class="photo-panel" onclick="scrollToProp('recoleccion')">
             <img src="https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTExNzUxMDA0MzAwNTIwNDcwNg%3D%3D/original/48e2d20a-4716-4fa6-a19b-e590d24c5a3d.jpeg?im_w=960" alt="Recolección">
-            <div class="carousel-label">
-              <div class="carousel-label-location">Ciudad de Guatemala, Zona 14</div>
-              <div class="carousel-label-name">Recolecci&oacute;n</div>
+            <div class="photo-panel-label">
+              <div class="photo-panel-loc">Ciudad, Zona 14</div>
+              <div class="photo-panel-name">Recolecci&oacute;n</div>
             </div>
           </div>
 
-          <div class="carousel-slide">
+          <div class="photo-panel" onclick="scrollToProp('eon')">
             <img src="https://a0.muscache.com/im/pictures/53a575b7-5722-472d-ac41-f04f9060163e.jpg?im_w=960" alt="EON">
-            <div class="carousel-label">
-              <div class="carousel-label-location">Ciudad de Guatemala, Zona 10</div>
-              <div class="carousel-label-name">EON</div>
+            <div class="photo-panel-label">
+              <div class="photo-panel-loc">Ciudad, Zona 10</div>
+              <div class="photo-panel-name">EON</div>
             </div>
           </div>
 
         </div>
-
-        <!-- Arrows -->
-        <button class="carousel-btn prev" onclick="carouselMove(-1)">&#8592;</button>
-        <button class="carousel-btn next" onclick="carouselMove(1)">&#8594;</button>
-
-        <!-- Dots -->
-        <div class="carousel-dots" id="carouselDots"></div>
       </div>
+
+      <!-- Arrows -->
+      <div class="grid-nav">
+        <button class="grid-btn" onclick="gridMove(-1)">&#8592;</button>
+        <button class="grid-btn" onclick="gridMove(1)">&#8594;</button>
+      </div>
+
+      <!-- Dots -->
+      <div class="grid-dots" id="gridDots"></div>
     </div>
   </section>
 
@@ -343,7 +344,7 @@
               <span class="amenity">A/C</span>
             </div>
             <div class="prop-footer">
-              <div class="prop-price">$85 <span>/ noche</span></div>
+              
               <div class="prop-card-btns">
                 <a href="https://www.airbnb.mx/rooms/1034801137700604686" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
                 <button class="btn-reservar" onclick="event.stopPropagation();openBooking('El Búcaro A')">Reservar</button>
@@ -370,7 +371,7 @@
               <span class="amenity">A/C</span>
             </div>
             <div class="prop-footer">
-              <div class="prop-price">$85 <span>/ noche</span></div>
+              
               <div class="prop-card-btns">
                 <a href="https://www.airbnb.mx/rooms/932713549454689623" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
                 <button class="btn-reservar" onclick="event.stopPropagation();openBooking('El Búcaro B')">Reservar</button>
@@ -397,7 +398,7 @@
               <span class="amenity">A/C</span>
             </div>
             <div class="prop-footer">
-              <div class="prop-price">$85 <span>/ noche</span></div>
+              
               <div class="prop-card-btns">
                 <a href="https://www.airbnb.mx/rooms/1021139159023263072" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
                 <button class="btn-reservar" onclick="event.stopPropagation();openBooking('El Búcaro C')">Reservar</button>
@@ -424,7 +425,7 @@
               <span class="amenity">A/C</span>
             </div>
             <div class="prop-footer">
-              <div class="prop-price">$85 <span>/ noche</span></div>
+              
               <div class="prop-card-btns">
                 <a href="https://www.airbnb.mx/rooms/999225140743766880" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
                 <button class="btn-reservar" onclick="event.stopPropagation();openBooking('El Búcaro D')">Reservar</button>
@@ -450,7 +451,7 @@
               <span class="amenity">Seguridad 24h</span>
             </div>
             <div class="prop-footer">
-              <div class="prop-price">$70 <span>/ noche</span></div>
+              
               <div class="prop-card-btns">
                 <a href="https://www.airbnb.mx/rooms/1117510043005204706" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
                 <button class="btn-reservar" onclick="event.stopPropagation();openBooking('Recolección')">Reservar</button>
@@ -476,7 +477,7 @@
               <span class="amenity">Parqueo</span>
             </div>
             <div class="prop-footer">
-              <div class="prop-price">$55 <span>/ noche</span></div>
+              
               <div class="prop-card-btns">
                 <a href="https://www.airbnb.mx/rooms/858040597501803291" target="_blank" class="btn-airbnb" onclick="event.stopPropagation()">Airbnb ↗</a>
                 <button class="btn-reservar" onclick="event.stopPropagation();openBooking('EON')">Reservar</button>
@@ -613,7 +614,7 @@
               <label>Mensaje (opcional)</label>
               <textarea id="mensaje" placeholder="Motivo del viaje, preguntas, necesidades especiales..."></textarea>
             </div>
-            <button type="submit" class="form-submit">Enviar cotizaci&oacute;n por WhatsApp &#128241;</button>
+            <button type="submit" class="form-submit">Enviar cotizaci&oacute;n por correo &#9993;</button>
             <p class="form-note">&#128274; Tu informaci&oacute;n es privada. No compartimos tus datos.</p>
           </form>
         </div>
@@ -630,37 +631,63 @@
   <!-- SUCCESS MODAL -->
   <div class="modal-overlay" id="successModal">
     <div class="modal">
-      <div class="modal-icon">&#128241;</div>
-      <div class="modal-title">¡Cotización enviada!</div>
-      <p class="modal-msg">Abrimos WhatsApp con tu solicitud para <strong id="modalProp"></strong>. Te confirmamos disponibilidad y precio exacto en menos de 2 horas.</p>
+      <div class="modal-icon">&#9993;</div>
+      <div class="modal-title">&#161;Cotizaci&oacute;n lista!</div>
+      <p class="modal-msg">Se abri&oacute; tu cliente de correo con la solicitud para <strong id="modalProp"></strong>. Te respondemos en menos de 2 horas con disponibilidad y precio.</p>
       <button class="modal-close" onclick="closeModal()">Perfecto</button>
     </div>
   </div>
 
   <script>
     // ============================================================
-    // AIRBNB LINKS por propiedad
+    // PHOTO GRID — HERO (2 paneles visibles, 6 fotos, flechas)
     // ============================================================
-    const AIRBNB_LINKS = {
-      'El Búcaro A':  'https://www.airbnb.mx/rooms/1034801137700604686',
-      'El Búcaro B':  'https://www.airbnb.mx/rooms/932713549454689623',
-      'El Búcaro C':  'https://www.airbnb.mx/rooms/1021139159023263072',
-      'El Búcaro D':  'https://www.airbnb.mx/rooms/999225140743766880',
-      'Recolección':  'https://www.airbnb.mx/rooms/1117510043005204706',
-      'EON':          'https://www.airbnb.mx/rooms/858040597501803291'
-    };
+    const PANELS = 6;
+    const VISIBLE = 2;
+    const STEPS = PANELS - VISIBLE; // 4 pasos posibles
+    let gridCurrent = 0;
+    let gridAuto;
 
-    // ---- Mostrar enlace a Airbnb al seleccionar propiedad ----
-    function updateAirbnbLink() {
-      const prop = document.getElementById('propiedad').value;
-      const hint = document.getElementById('airbnbHint');
-      const link = document.getElementById('airbnbLink');
-      if (AIRBNB_LINKS[prop]) {
-        link.href = AIRBNB_LINKS[prop];
-        hint.style.display = 'block';
-      } else {
-        hint.style.display = 'none';
-      }
+    const grid = document.getElementById('photoGrid');
+    const dotsWrap = document.getElementById('gridDots');
+
+    // Crear dots (4 posiciones)
+    for (let i = 0; i <= STEPS; i++) {
+      const d = document.createElement('button');
+      d.className = 'grid-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => { gridAuto && clearInterval(gridAuto); gridGoTo(i); resetGridAuto(); });
+      dotsWrap.appendChild(d);
+    }
+
+    function gridGoTo(idx) {
+      gridCurrent = Math.max(0, Math.min(idx, STEPS));
+      const panelW = grid.parentElement.offsetWidth / VISIBLE;
+      grid.style.transform = `translateX(-${gridCurrent * panelW}px)`;
+      document.querySelectorAll('.grid-dot').forEach((d, i) => d.classList.toggle('active', i === gridCurrent));
+    }
+
+    function gridMove(dir) {
+      clearInterval(gridAuto);
+      gridGoTo(gridCurrent + dir);
+      resetGridAuto();
+    }
+
+    function resetGridAuto() {
+      gridAuto = setInterval(() => gridGoTo((gridCurrent + 1) > STEPS ? 0 : gridCurrent + 1), 4000);
+    }
+
+    resetGridAuto();
+
+    // Recalcular al cambiar tamaño
+    window.addEventListener('resize', () => gridGoTo(gridCurrent));
+
+    // Scroll a propiedad al hacer clic
+    const PROP_IDS = {
+      'bucaro-a': 0, 'bucaro-b': 1, 'bucaro-c': 2,
+      'bucaro-d': 3, 'recoleccion': 4, 'eon': 5
+    };
+    function scrollToProp(id) {
+      document.getElementById('propiedades').scrollIntoView({ behavior: 'smooth' });
     }
 
     // ---- Nav scroll ----
@@ -684,7 +711,24 @@
       setTimeout(() => document.getElementById('nombre').focus(), 600);
     }
 
-    // ---- Submit → WhatsApp ----
+    // ---- Mostrar enlace Airbnb al seleccionar propiedad ----
+    const AIRBNB_LINKS = {
+      'El Búcaro A': 'https://www.airbnb.mx/rooms/1034801137700604686',
+      'El Búcaro B': 'https://www.airbnb.mx/rooms/932713549454689623',
+      'El Búcaro C': 'https://www.airbnb.mx/rooms/1021139159023263072',
+      'El Búcaro D': 'https://www.airbnb.mx/rooms/999225140743766880',
+      'Recolección': 'https://www.airbnb.mx/rooms/1117510043005204706',
+      'EON':         'https://www.airbnb.mx/rooms/858040597501803291'
+    };
+    function updateAirbnbLink() {
+      const prop = document.getElementById('propiedad').value;
+      const hint = document.getElementById('airbnbHint');
+      const link = document.getElementById('airbnbLink');
+      if (AIRBNB_LINKS[prop]) { link.href = AIRBNB_LINKS[prop]; hint.style.display = 'block'; }
+      else { hint.style.display = 'none'; }
+    }
+
+    // ---- Submit → mailto ----
     function handleSubmit(e) {
       e.preventDefault();
       const prop      = document.getElementById('propiedad').value;
@@ -699,28 +743,28 @@
       const nights = Math.round((new Date(salida) - new Date(llegada)) / 86400000);
       if (nights <= 0) { alert('La fecha de salida debe ser posterior a la llegada.'); return; }
 
-      const waMsg = encodeURIComponent(
-        '¡Hola! Quiero cotizar una estadía en Vacasa Group 🏡\n\n' +
-        '📋 *Datos de la solicitud*\n' +
-        '• Nombre: ' + nombre + '\n' +
-        '• Tel: ' + tel + '\n' +
-        '• Propiedad: ' + prop + '\n' +
-        '• Llegada: ' + llegada + '\n' +
-        '• Salida: ' + salida + '\n' +
-        '• Noches: ' + nights + '\n' +
-        '• Huéspedes: ' + huespedes +
-        (msg ? '\n• Mensaje: ' + msg : '') + '\n\n' +
-        '¿Pueden confirmarme disponibilidad y precio? 🙏'
+      const subject = encodeURIComponent('Cotización — ' + prop + ' | ' + llegada + ' al ' + salida);
+      const body = encodeURIComponent(
+        'Hola equipo Vacasa Group,\n\n' +
+        'Me gustaría solicitar una cotización:\n\n' +
+        'Nombre: ' + nombre + '\n' +
+        'WhatsApp: ' + tel + '\n' +
+        'Propiedad: ' + prop + '\n' +
+        'Llegada: ' + llegada + '\n' +
+        'Salida: ' + salida + '\n' +
+        'Noches: ' + nights + '\n' +
+        'Huéspedes: ' + huespedes +
+        (msg ? '\n\nMensaje adicional:\n' + msg : '') +
+        '\n\n¿Pueden confirmarme disponibilidad y precio? Gracias.'
       );
 
-      // Mostrar modal
+      // TODO: Reemplaza con tu correo real
+      window.location.href = 'mailto:info@vacasagroup.com?subject=' + subject + '&body=' + body;
+
       document.getElementById('modalProp').textContent = prop;
       document.getElementById('successModal').classList.add('open');
       document.getElementById('bookingForm').reset();
       document.getElementById('airbnbHint').style.display = 'none';
-
-      // TODO: Reemplaza 50212345678 con tu número real de WhatsApp
-      setTimeout(() => window.open('https://wa.me/50212345678?text=' + waMsg, '_blank'), 600);
     }
 
     // ---- Cerrar modal ----
